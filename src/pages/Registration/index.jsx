@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaEye, FaEyeSlash, FaSignInAlt } from 'react-icons/fa'
 import moment from 'moment/moment'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Registration = () => {
     const history = useNavigate()
@@ -29,8 +31,7 @@ const Registration = () => {
         setFormData({ ...formData, [name]: value })
     }
 
-    const isloggedIn = localStorage.getItem('islogged')
-    !isloggedIn && navigate(`/login`)
+  
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -54,21 +55,36 @@ const Registration = () => {
             )
 
             if (response.ok) {
-                console.log('Registration successful!')
-                // Redirect to another page or show a success message to the user
+             
+                toast.success("Registration successful!");
             } else {
                 const errorMessage = await response.text()
-                console.error('Registration failed:', errorMessage)
-                // Handle registration error, show an error message to the user, etc.
+            
+                toast.error('Registration failed:',errorMessage);
             }
         } catch (error) {
-            console.error('Error during registration:', error)
+         
+            toast.error('Error during registration:', error);
         }
     }
 
     return (
         <>
+       
             <div className="flex flex-1 flex-col items-center justify-center p-4">
+
+            <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
                 <form
                     onSubmit={handleSubmit}
                     className="w-full max-w-[360px] rounded-lg bg-white p-5 shadow-lg"
