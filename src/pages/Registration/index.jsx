@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaEye, FaEyeSlash, FaSignInAlt } from 'react-icons/fa'
+import moment from 'moment/moment'
 
 const Registration = () => {
     const history = useNavigate()
@@ -13,6 +14,7 @@ const Registration = () => {
         password: '',
         cardNo: '',
         role: '',
+        time:moment().unix(),
         signIn: 0,
     })
 

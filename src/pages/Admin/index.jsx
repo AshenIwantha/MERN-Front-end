@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import UserCard from '../../components/UserCard'
 import { FaSignOutAlt } from 'react-icons/fa'
+import moment from 'moment'
 
 const Web = () => {
     const [users, setUsers] = useState([])
@@ -43,6 +44,8 @@ const Web = () => {
         fetchUsers()
     }, [message])
 
+console.log(users,"user")
+
     return (
         <>
             <div className="flex-1 p-4">
@@ -51,7 +54,7 @@ const Web = () => {
                 <div className="flex flex-wrap gap-6">
                     {users?.map((user, index) => (
                         <UserCard
-                            time={user.time}
+                            time={user.time ? moment.unix(user.time).format('YYYY-MM-DD HH:mm:ss'):"-"}
                             username={user.email}
                             signIn={user.signIn}
                             key={index}
